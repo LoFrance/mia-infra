@@ -1,6 +1,12 @@
 on:
   workflow_call:
-    secrets: inherit
+    secrets:
+      ARM_CLIENT_ID:
+        required: true
+      ARM_SUBSCRIPTION_ID:
+        required: true
+      ARM_TENANT_ID:
+        required: true
     inputs:
       environment:
         description: Environment where the resources will be deployed.
