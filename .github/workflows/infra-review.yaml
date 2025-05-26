@@ -18,7 +18,18 @@ on:
       - "infra/resources/"
 
 jobs:
+  set_env_vars:
+    runs-on: ubuntu-latest
+    outputs:
+      env_vars: ${{ steps.set_env_vars.outputs.env_vars }}
+    steps:
+      - name: Set Environment Variables
+        id: set_env_vars
+        run: |
+          echo "env_vars=ARM_SUBSCRIPTION_ID=${{ secrets.ARM_SUBSCRIPTION_ID }}\nARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }}\nARM_CLIENT_ID=${{ secrets.ARM_CLIENT_ID }}" >> $GITHUB_OUTPUT
+
   infra_review:
+    needs: set_env_vars
     uses: pagopa/dx/.github/workflows/infra_plan.yaml@main
     name: PR Prod ItalyNorth
     secrets: inherit
@@ -27,7 +38,4 @@ jobs:
       base_path: infra/resources
       use_private_agent: false
       override_github_environment: infra-prod
-      env_vars: |
-        ARM_SUBSCRIPTION_ID=${{ secrets.ARM_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }}
-        ARM_CLIENT_ID=${{ secrets.ARM_CLIENT_ID }}
+      env_vars: ${{ needs.set_env_vars.outputs.env_vars }}
