@@ -19,7 +19,7 @@ on:
 
 jobs:
   infra_review:
-    uses: LoFrance/mia-infra/.github/workflows/infra_plan.yaml@main
+    uses: LoFrance/mia-infra/.github/workflows/infra-plan.yaml@main
     name: PR Prod ItalyNorth
     with:
       environment: prod
