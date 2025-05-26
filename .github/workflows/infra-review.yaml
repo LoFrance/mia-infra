@@ -1,4 +1,4 @@
-name: Plan It (resources)
+name: Plan (resources)
 
 permissions:
   id-token: write
@@ -19,19 +19,11 @@ on:
 
 jobs:
   infra_review:
+    uses: pagopa/dx/.github/workflows/infra_plan.yaml@main
     name: PR Prod ItalyNorth
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set Environment Variables
-        run: |
-          echo "ARM_SUBSCRIPTION_ID=${{ secrets.ARM_SUBSCRIPTION_ID }}" >> $GITHUB_ENV
-          echo "ARM_TENANT_ID=${{ secrets.ARM_TENANT_ID }}" >> $GITHUB_ENV
-          echo "ARM_CLIENT_ID=${{ secrets.ARM_CLIENT_ID }}" >> $GITHUB_ENV
-
-      - name: Run Workflow
-        uses: pagopa/dx/.github/workflows/infra_plan.yaml@main
-        with:
-          environment: prod
-          base_path: infra/resources
-          use_private_agent: false
-          override_github_environment: infra-prod
+    secrets: inherit
+    with:
+      environment: prod
+      base_path: infra/resources
+      use_private_agent: false
+      override_github_environment: infra-prod
