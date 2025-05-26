@@ -23,7 +23,7 @@ jobs:
     name: PR Prod ItalyNorth
     secrets: inherit
     with:
-      environment: prod
+      environment: infra-prod
       base_path: infra/resources
       use_private_agent: false
-      override_github_environment: infra-prod-ci
+      override_github_environment: infra-prod
