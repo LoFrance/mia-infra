@@ -1,13 +1,12 @@
-name: PR Infrastructure Plan
+name: Plan (resources)
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
 
 on:
   workflow_dispatch:
-    inputs:
-      use_private_agent:
-        description: Use a private agent to deploy the built artifact.
-        type: boolean
-        required: false
-        default: false
   pull_request:
     types:
       - opened
@@ -20,10 +19,11 @@ on:
 
 jobs:
   infra_review:
-    uses: pagopa/dx/.github/workflows/infra_plan.yaml@20d0f058e2ec917e2d00ad1732f20c55b0cc2ef5
-    name: PR Prod WestEurope
+    uses: pagopa/dx/.github/workflows/infra_plan.yaml@main
+    name: PR Prod ItalyNorth
     secrets: inherit
     with:
       environment: prod
       base_path: infra/resources
-      use_private_agent: ${{ github.event_name != 'workflow_dispatch' && false }}
+      use_private_agent: false
+      override_github_environment: infra-prod
