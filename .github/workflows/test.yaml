@@ -1,3 +1,22 @@
+name: Plan Test (resources)
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+on:
+  workflow_dispatch:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+    paths:
+      - ".github/workflows/infra-**.yaml"
+      - "infra/resources/**"
+
 jobs:
   test:
     runs-on: ubuntu-latest
