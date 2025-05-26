@@ -1,0 +1,25 @@
+name: Release Infrastructure
+
+on:
+  workflow_dispatch:
+    inputs:
+      use_private_agent:
+        description: Use a private agent to deploy the built artifact.
+        type: boolean
+        required: false
+        default: false
+  push:
+    branches:
+      - main
+    paths:
+      - "infra/resources/**"
+
+jobs:
+  infra_release:
+    uses: pagopa/dx/.github/workflows/infra_apply.yaml@main
+    name: Release Infrastructure
+    secrets: inherit
+    with:
+      environment: prod
+      base_path: infra/resources
+      use_private_agent: ${{ github.event_name != 'workflow_dispatch' && false }}
