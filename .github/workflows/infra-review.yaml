@@ -21,9 +21,13 @@ jobs:
   infra_review:
     uses: pagopa/dx/.github/workflows/infra_plan.yaml@main
     name: PR Prod ItalyNorth
-    secrets: inherit
     with:
       environment: prod
       base_path: infra/resources
       use_private_agent: false
       override_github_environment: infra-prod
+    secrets:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
