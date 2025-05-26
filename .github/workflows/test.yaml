@@ -26,7 +26,7 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: infra-prod # Test diretto
+    environment: infra-prod-ci # Test diretto
     steps:
       - name: Test environment
         run: echo "Environment found!"
