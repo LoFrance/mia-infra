@@ -25,7 +25,6 @@ jobs:
   infra_review:
     uses: pagopa/dx/.github/workflows/infra_plan.yaml@main
     name: PR Prod ItalyNorth
-    secrets: inherit
     with:
       environment: prod
       base_path: infra/resources
