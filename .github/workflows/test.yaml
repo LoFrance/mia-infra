@@ -17,6 +17,11 @@ on:
       - ".github/workflows/infra-**.yaml"
       - "infra/resources/**"
 
+env:
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -24,3 +29,10 @@ jobs:
     steps:
       - name: Test environment
         run: echo "Environment found!"
+
+      - name: Azure Login
+        uses: azure/login@a65d910e8af852a8061c627c456678983e180302 # v2.2.0
+        with:
+          client-id: ${{ env.ARM_CLIENT_ID }}
+          tenant-id: ${{ env.ARM_TENANT_ID }}
+          subscription-id: ${{ env.ARM_SUBSCRIPTION_ID }}
