@@ -1,34 +1,36 @@
 terraform {
-
-  backend "azurerm" {
-    resource_group_name  = "terraform-state-rg"
-    storage_account_name = "smpitntfst001"
-    container_name       = "terraform-state"
-    key                  = "sm.resources.tfstate"
-    use_azuread_auth     = true
-  }
-
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 4.0"
+      version = "~>4"
     }
+
     azuread = {
       source  = "hashicorp/azuread"
-      version = "~> 3.0"
+      version = "~>3"
     }
+
     github = {
       source  = "integrations/github"
       version = "~>6"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name  = "terraform-state-rg"
+    storage_account_name = "lorenzopitntfst001"
+    container_name       = "terraform-state"
+    key                  = "plsm-prod.repository.tfstate"
+    use_azuread_auth     = true
+  }
 }
 
 provider "azurerm" {
-  features {}
+  features {
+  }
   storage_use_azuread = true
 }
 
 provider "github" {
-  owner = "lofrance"
+  owner = "LoFrance"
 }

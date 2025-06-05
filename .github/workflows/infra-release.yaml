@@ -20,7 +20,7 @@ permissions:
 
 jobs:
   infra_release:
-    uses: LoFrance/mia-infra/.github/workflows/_infra_apply.yaml@main
+    uses: pagopa/dx/.github/workflows/infra_apply.yaml@main
     name: Release Infrastructure
     secrets: inherit
     with:

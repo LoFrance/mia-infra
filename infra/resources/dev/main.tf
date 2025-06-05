@@ -2,9 +2,9 @@ terraform {
 
   backend "azurerm" {
     resource_group_name  = "terraform-state-rg"
-    storage_account_name = "smpitntfst001"
+    storage_account_name = "plsmditntfst099"
     container_name       = "terraform-state"
-    key                  = "sm.resources.tfstate"
+    key                  = "plsm-dev.resources.tfstate"
     use_azuread_auth     = true
   }
 
@@ -17,10 +17,6 @@ terraform {
       source  = "hashicorp/azuread"
       version = "~> 3.0"
     }
-    github = {
-      source  = "integrations/github"
-      version = "~>6"
-    }
   }
 }
 
@@ -29,11 +25,7 @@ provider "azurerm" {
   storage_use_azuread = true
 }
 
-provider "github" {
-  owner = "lofrance"
-}
+data "azurerm_subscription" "current" {}
 
-resource "azurerm_resource_group" "example" {
-  location =  "eastus"
-  name     = "husgky-group"
-}
+data "azurerm_client_config" "current" {}
+
