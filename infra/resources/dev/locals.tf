@@ -1,8 +1,10 @@
 locals {
-  prefix    = "plsm"
-  env_short = "d"
+  full_prefix    = "plsm"
+  prefix         = "sm"
+  module_prefix  = substr(local.full_prefix, 2, 2)
+  env_short      = "d"
   location_short = "itn"
-  domain    = "plsm"
+  domain         = "plsm"
   # the project on which the resources will be created
   # it's the prefix of any resource name
   # it includes the choosen location
@@ -10,9 +12,9 @@ locals {
   # "plsm-d-itn-plsm"
 
 
-  location  = "italynorth"
-  env       = "dev"
-  
+  location = "italynorth"
+  env      = "dev"
+
   instance_number = "01"
 
   # some referenced resources are in a different location
@@ -26,8 +28,15 @@ locals {
     location  = local.location
     domain    = local.domain
   }
-  
 
+  # adgroups = {
+  #   admins_name = "plsm-p-adgroup-admin"
+  #   devs_name   = "plsm-p-adgroup-developers"
+  # }
+
+  adgroups = {
+    admins_name = "admins"
+  }
   tags = {
     CostCenter     = "TS310 - PAGAMENTI & SERVIZI"
     CreatedBy      = "Terraform"
