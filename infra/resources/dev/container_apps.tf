@@ -6,7 +6,7 @@ module "container_apps" {
 
   virtual_network = azurerm_virtual_network.vnet-common-itn
 
-  subnet_cidr = "10.10.3.0/24"
+  subnet_cidr = azurerm_subnet.container_app.address_prefixes[0]
 
   subnet_pep_id                        = azurerm_subnet.subnet_pep.id
   private_dns_zone_resource_group_name = azurerm_resource_group.itn_com.name

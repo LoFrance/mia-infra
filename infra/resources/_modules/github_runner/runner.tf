@@ -26,7 +26,7 @@ module "container_app_github_runner" {
   }
 
   repository = {
-    name = "io-infra"
+    name = "mia-infra"
   }
 
   tags = var.tags

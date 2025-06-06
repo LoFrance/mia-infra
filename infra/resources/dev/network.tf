@@ -19,6 +19,13 @@ resource "azurerm_subnet" "web" {
   address_prefixes     = ["10.10.3.0/24"]
 }
 
+resource "azurerm_subnet" "container_app" {
+  name                 = "container-app"
+  resource_group_name  = azurerm_resource_group.itn_com.name
+  virtual_network_name = azurerm_virtual_network.vnet-common-itn.name
+  address_prefixes     = ["10.10.4.0/24"]
+}
+
 resource "azurerm_subnet" "postgres" {
   name                 = "snet-postgres"
   resource_group_name  = azurerm_resource_group.itn_com.name
